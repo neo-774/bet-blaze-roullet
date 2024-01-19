@@ -1,6 +1,4 @@
-import random
-from constants import COLORS, ROULLET
-import json
+from constants import COLORS, ROULLET 
 import matplotlib.pyplot as plt
 from utils import generate_next_bet_amount, generate_award, generate_bet_number, roullet_bet_number
 

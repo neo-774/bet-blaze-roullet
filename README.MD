@@ -18,7 +18,7 @@
 
 # Simulations
 
-the simulations try to maximize the profit and optimize the loss, by eating only the profit when wining, and betting the amount of loss...
+the simulations try to maximize the profit and optimize the loss, by beating only the profit when wining, and betting the amount of loss...
 
 but that enormous amount of simulations and strategies like martingale vs fibonacci and kelly criterion, resulting and loss thouth the time.
 

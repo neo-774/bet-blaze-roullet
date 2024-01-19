@@ -9,7 +9,7 @@
 - white, red, black
 - the roulette should be something like that
 
-* ` ROULLET = [
+* ` ROULETTE = [
 'white', 'black', 'red', 'black', 'red', 'black', 'red', 'black', 'red',
 'black', 'red', 'black', 'red', 'black', 'red'
 ]`

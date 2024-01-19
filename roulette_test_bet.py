@@ -1,31 +1,31 @@
-from constants import COLORS, ROULLET 
+from constants import COLORS, ROULETTE 
 import matplotlib.pyplot as plt
-from utils import generate_next_bet_amount, generate_award, generate_bet_number, roullet_bet_number
+from utils import generate_next_bet_amount, generate_award, generate_bet_number, roulette_bet_number
 
 
-def roullet_run(num_sim, balance, bet_amount, bets, initial_balance):
-    roullet_index_result = COLORS.index(ROULLET[roullet_bet_number()])
-    bet_color = ROULLET[generate_bet_number()]
+def roulette_run(num_sim, balance, bet_amount, bets, initial_balance):
+    roulette_index_result = COLORS.index(ROULETTE[roulette_bet_number()])
+    bet_color = ROULETTE[generate_bet_number()]
     bet_color_index = COLORS.index(bet_color)
     last_bet_amount = bet_amount
     bet_amount = 0.1
     if num_sim > 0:
         bet_amount = generate_next_bet_amount(bets[num_sim-1])
 
-    roullet_result = generate_award(
+    roulette_result = generate_award(
         balance,
         bet_color_index,
-        roullet_index_result,
+        roulette_index_result,
         bet_amount,
     )
     bets.append({
         'bet_color': bet_color,
-        'roullet_color': ROULLET[roullet_index_result],
+        'roulette_color': ROULETTE[roulette_index_result],
         'initial_balance': initial_balance,
         'last_bet_amount': last_bet_amount,
         'num_sim': num_sim,
         'current_bet_amount': round(bet_amount, 2),
-        'roullet_result': roullet_result
+        'roulette_result': roulette_result
     })
 
     return bets
@@ -43,13 +43,13 @@ def loop_game():
      
     for num_sim in range(num_simulations):
         if num_sim == 0:
-            bets = roullet_run(num_sim, balance, bet_amount, bets, initial_balance)
+            bets = roulette_run(num_sim, balance, bet_amount, bets, initial_balance)
         else:
-            current_balance = bets[num_sim - 1]['roullet_result']['current_balance']
-            bets = roullet_run(num_sim, current_balance, bet_amount, bets, initial_balance)
+            current_balance = bets[num_sim - 1]['roulette_result']['current_balance']
+            bets = roulette_run(num_sim, current_balance, bet_amount, bets, initial_balance)
 
         if bets and num_sim < len(bets):
-            current_balance = bets[num_sim - 1]['roullet_result']['current_balance']
+            current_balance = bets[num_sim - 1]['roulette_result']['current_balance']
             balances.append(current_balance)
             bet_amounts.append(bets[num_sim - 1]['current_bet_amount'])
 

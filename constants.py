@@ -1,6 +1,6 @@
 COLORS = ['white', 'red', 'black']
 
-ROULLET = [
+ROULETTE = [
     'white', 'black', 'red', 'black', 'red', 'black', 'red', 'black', 'red',
     'black', 'red', 'black', 'red', 'black', 'red'
 ]

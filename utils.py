@@ -1,7 +1,7 @@
 
 import random
-from constants import ROULLET, COLORS
-random.shuffle(ROULLET)
+from constants import ROULETTE, COLORS
+random.shuffle(ROULETTE)
 
 def generate_strategy(history):
     strategies = ["default", "martingale", "fibonacci"]
@@ -22,19 +22,19 @@ def simulate_strategy(history, strategy):
 
     for bet in history:
         next_bet_amount = generate_next_bet_amount(bet, base_bet_amount, strategy)
-        current_balance = generate_new_balance(current_balance, next_bet_amount, bet['roullet_result']['award'])
+        current_balance = generate_new_balance(current_balance, next_bet_amount, bet['roulette_result']['award'])
 
     return current_balance
 
  
 
 def default_strategy(bet, diff):
-    if bet['roullet_result']['current_balance'] > bet['initial_balance']:
-        bet_amount = bet['roullet_result']['current_balance'] - bet['initial_balance']
+    if bet['roulette_result']['current_balance'] > bet['initial_balance']:
+        bet_amount = bet['roulette_result']['current_balance'] - bet['initial_balance']
         return round(bet_amount, 2)
 
     if diff < 0:
-        bet_amount = min(diff / 2, bet['roullet_result']['current_balance'] / 1.5)
+        bet_amount = min(diff / 2, bet['roulette_result']['current_balance'] / 1.5)
         if bet_amount < 0.10:
             return 0.10
         return bet_amount
@@ -43,14 +43,14 @@ def default_strategy(bet, diff):
 
 
 def martingale_strategy(bet, base_bet_amount):
-    if not bet['roullet_result']['result']:
+    if not bet['roulette_result']['result']:
         return 2 * base_bet_amount
     else:
         return base_bet_amount
 
 
 def fibonacci_strategy(bet, base_bet_amount): 
-    if not bet['roullet_result']['result']:
+    if not bet['roulette_result']['result']:
         fib_sequence = [0, 1]
         while fib_sequence[-1] + fib_sequence[-2] <= base_bet_amount:
             fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
@@ -61,9 +61,9 @@ def fibonacci_strategy(bet, base_bet_amount):
 
 
 def generate_next_bet_amount(bet):
-    diff = bet['initial_balance'] - bet['roullet_result']['current_balance'] 
+    diff = bet['initial_balance'] - bet['roulette_result']['current_balance'] 
     if diff >= 0:
-        bet_amount = min(diff / 2, bet['roullet_result']['current_balance'] / 1.5)
+        bet_amount = min(diff / 2, bet['roulette_result']['current_balance'] / 1.5)
         if bet_amount < 0.10:
             return 0.20
         return bet_amount
@@ -74,7 +74,7 @@ def generate_next_bet_amount(bet):
 def generate_award(
     balance,
     bet_color_index, 
-    roullet_index_result,
+    roulette_index_result,
     bet_amount,
   ):
     award = 0
@@ -84,7 +84,7 @@ def generate_award(
         award = bet_amount * 2
         
     old_balance_minus_bet = (round(balance, 2) - bet_amount)
-    if bet_color_index == roullet_index_result: 
+    if bet_color_index == roulette_index_result: 
       current_balance = round(old_balance_minus_bet, 2) + award
       return {
          'old_balance': round(old_balance_minus_bet, 2),
@@ -107,7 +107,7 @@ def generate_award(
 def generate_new_balance(balance, bet_amount, award):
    return (balance-bet_amount) + award
 
-def roullet_bet_number():
+def roulette_bet_number():
   return random.randrange(0, 14)
 
 def generate_bet_number():
